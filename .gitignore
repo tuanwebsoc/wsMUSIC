@@ -1,0 +1,8 @@
+# Eclipse
+.settings
+.buildpath
+.project
+
+# Windows
+Thumbs.db
+Desktop.ini

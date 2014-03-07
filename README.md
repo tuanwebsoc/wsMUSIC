@@ -3,8 +3,10 @@ WS Music
 Members
  - Tien
  - Tuan
+ - Phuong
+ 
+ The package WSMusic
 =========================================================
-The package WSMusic
 
 MODULES:
 - mod_wsmusicSearch (đa năng như nhaccuatui.com )

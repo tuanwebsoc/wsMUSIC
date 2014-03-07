@@ -3,7 +3,6 @@ WS Music
 Members
  - Tien
  - Tuan
- - Phuong
 =========================================================
 The package WSMusic
 

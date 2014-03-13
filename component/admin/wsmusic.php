@@ -16,7 +16,7 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_wsmusic'))
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
-JLoader::register('PortfolioHelper', dirname(__FILE__) . '/helpers/helper_wsmusic.php');
+JLoader::register('WsmusicHelper', dirname(__FILE__) . '/helpers/wsmusichelper.php');
 
 $controller=JControllerLegacy::getInstance('wsmusic');
 $controller->execute(JFactory::getApplication()->input->get('task'));

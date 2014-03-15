@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 JHtml::_('behavior.tabstate');
 
 // Access check: is this user allowed to access the backend of this component?
-if (!JFactory::getUser()->authorise('core.manage', 'com_wsmusic'))
+if (!JFactory::getUser()->authorise('core.manage', 'com_content'))
 {
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }

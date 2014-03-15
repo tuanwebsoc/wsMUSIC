@@ -11,10 +11,9 @@ defined('_JEXEC') or die('Restricted access');
 JHtml::_('behavior.tabstate');
 
 // Access check: is this user allowed to access the backend of this component?
-try {
-	JFactory::getUser()->authorise('core.manage', 'com_wsmusic');
-} catch (Exception $e) {
-	JLog::add(JText::_($e->getMessage()), JLog::WARNING, 'jerror');
+if (!JFactory::getUser()->authorise('core.manage', 'com_content'))
+{
+	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
 JLoader::register('WsmusicHelper', dirname(__FILE__) . '/helpers/wsmusichelper.php');

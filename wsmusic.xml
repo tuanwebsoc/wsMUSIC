@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+    <name>COM_WSMUSIC</name>
+    <creationDate>March 2014</creationDate>
+    <author>websoc.vn</author>
+    <authorEmail>info@websoc.vn</authorEmail>
+    <authorUrl>www.websoc.vn</authorUrl>
+    <copyright>(c) websoc.vn</copyright>
+    <license>GNU/GPL</license>
+    <version>1.0.0.1</version>
+    <description>COM_WSMUSIC_DESCRIPTION</description>
+    <scriptfile>install.php</scriptfile>
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall> 
+        <sql>
+            <file driver="mysql" charset="utf8">uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+
+    <files folder="component/site">
+        <folder>controllers</folder>
+        <folder>helpers</folder>
+        <folder>models</folder>
+        <folder>views</folder>
+        <filename>index.html</filename>
+        <filename>wsmusic.php</filename>
+        <filename>router.php</filename>
+    </files>
+
+    <languages folder="component/site/language">
+        <language tag="en-GB">en-GB/en-GB.com_wsmusic.ini</language>
+    </languages>
+
+    <!-- Medias 
+    <media destination="com_wsmusic" folder="media/com_wsmusic">
+        <folder>css</folder>
+        <folder>images</folder>
+        <folder>js</folder>
+        <filename>index.html</filename>
+    </media> -->
+
+    <administration>
+        <menu img="">COM_WSMUSIC</menu>
+        <files folder="component/admin">
+            <folder>controllers</folder>
+            <folder>helpers</folder>
+            <folder>models</folder>
+            <folder>sql</folder>
+            <folder>tables</folder>
+            <folder>views</folder>
+            <filename>config.xml</filename>
+            <filename>index.html</filename>
+            <filename>install.mysql.utf8.sql</filename>
+            <filename>wsmusic.php</filename>
+            <filename>uninstall.mysql.utf8.sql</filename>
+        </files>
+        <languages folder="component/admin/language">
+            <language tag="en-GB">en-GB/en-GB.com_wsmusic.ini</language>
+            <language tag="en-GB">en-GB/en-GB.com_wsmusic.sys.ini</language>
+        </languages>
+    </administration>
+
+    <!-- Libraries to install with the component -->
+    <libraries>
+        <!--library name="redshop" /-->
+    </libraries>
+
+    <!-- Modules to install with the component 
+    <modules>
+        <module name="mod_wsmusic_toprate" client="site" />
+    </modules>
+	-->
+    <!-- Plugins to install with the component
+    <plugins>
+        <plugin name="rs_payment_banktransfer" group="redshop_payment" />
+        <plugin name="rs_payment_paypal" group="redshop_payment" />
+        <plugin name="default_shipping" group="redshop_shipping" />
+    </plugins> -->
+</extension>

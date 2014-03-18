@@ -6,7 +6,7 @@
 DROP TABLE IF EXISTS `com_wsmusic_artist` ;
 
 CREATE TABLE IF NOT EXISTS `com_wsmusic_artist` (
-  `id` INT(10) NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NULL,
   `birthday` DATE NULL,
   `biography` MEDIUMTEXT NULL,
@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS `com_wsmusic_artist` (
   `nation` SMALLINT NULL COMMENT 'use php array',
   `company` SMALLINT NULL COMMENT 'use an php array to parse this value like state',
   `related` TEXT NULL COMMENT 'related artist(JSON)',
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  PRIMARY KEY (`id`)
+)DEFAULT CHARSET=utf8;
 
 
 -- -----------------------------------------------------
@@ -24,7 +24,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `com_wsmusic_track` ;
 
 CREATE TABLE IF NOT EXISTS `com_wsmusic_track` (
-  `id` INT(10) NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(255) NULL,
   `asset_id` INT(10) NULL COMMENT 'FK to the assets table',
   `alias` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
@@ -53,10 +53,8 @@ CREATE TABLE IF NOT EXISTS `com_wsmusic_track` (
     FOREIGN KEY (`artist`)
     REFERENCES `com_wsmusic_artist` (`id`)
     ON DELETE SET NULL
-    ON UPDATE SET NULL)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+    ON UPDATE SET NULL
+)DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -65,7 +63,7 @@ COLLATE = utf8_unicode_ci;
 DROP TABLE IF EXISTS `playlist` ;
 
 CREATE TABLE IF NOT EXISTS `playlist` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `tracks` MEDIUMTEXT NULL COMMENT 'json array contain track id',
   `hits` INT NULL,
@@ -76,8 +74,7 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `catid` INT NULL,
   `type` TINYINT COMMENT 'option:playlist,favorites,album..'
   'created_by' INT 
-  `desciption` MEDIUMTEXT NULL)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+  `desciption` MEDIUMTEXT NULL
+)
+DEFAULT CHARACTER SET = utf8;
 

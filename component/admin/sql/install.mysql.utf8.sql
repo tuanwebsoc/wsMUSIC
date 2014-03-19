@@ -1,80 +1,78 @@
 
 
 -- -----------------------------------------------------
--- Table `com_wsmusic_artist`
+-- Table `#__wsmusic_artist`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `com_wsmusic_artist` ;
+DROP TABLE IF EXISTS `#__wsmusic_artist` ;
 
-CREATE TABLE IF NOT EXISTS `com_wsmusic_artist` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NULL,
-  `birthday` DATE NULL,
-  `biography` MEDIUMTEXT NULL,
-  `birthname` VARCHAR(100) NULL,
-  `nation` SMALLINT NULL COMMENT 'use php array',
-  `company` SMALLINT NULL COMMENT 'use an php array to parse this value like state',
-  `related` TEXT NULL COMMENT 'related artist(JSON)',
-  PRIMARY KEY (`id`)
-)DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `#__wsmusic_artist` (
+  `id` INT UNSIGNED AUTO_INCREMENT,
+  `name` VARCHAR(100),
+  `birthday` DATE,
+  `biography` MEDIUMTEXT,
+  `birthname` VARCHAR(100),
+  `nation` SMALLINT COMMENT 'use php array',
+  `company` SMALLINT COMMENT 'use an php array to parse this value like state',
+  `related` TEXT COMMENT 'related artist(JSON)',
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `com_wsmusic_track`
+-- Table `#__wsmusic_track`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `com_wsmusic_track` ;
+DROP TABLE IF EXISTS `#__wsmusic_track` ;
 
-CREATE TABLE IF NOT EXISTS `com_wsmusic_track` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(255) NULL,
-  `asset_id` INT(10) NULL COMMENT 'FK to the assets table',
-  `alias` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
-  `lyrics` MEDIUMTEXT NULL,
-  `state` TINYINT(3) NULL,
-  `catid` TINYINT(3) NULL,
-  `created` DATETIME NULL DEFAULT 0000-00-00 00:00:00,
-  `created_by` INT(10) NULL,
-  `publish_up` DATETIME NULL DEFAULT 0000-00-00 00:00:00,
-  `ordering` INT(11) NULL,
-  `access` INT(10) NULL,
-  `hits` INT(10) NULL DEFAULT 0,
-  `downloads` INT(10) NULL DEFAULT 0,
-  `artist` INT(10) NULL,
-  `params` MEDIUMTEXT NULL,
-  `modified` DATETIME NULL DEFAULT 0000-00-00 00:00:00,
-  `modified_by` INT(10) NULL,
-  `featured` TINYINT(3) NULL,
-  `source` TEXT NULL COMMENT 'video can even have multible resolution with multiple sourcefile',
-  `language` TINYINT(3) NULL,
-  `video` TINYINT(1) NULL DEFAULT false COMMENT 'true mean this is video',
-  `related` VARCHAR(100) NULL,
+CREATE TABLE IF NOT EXISTS `#__wsmusic_track` (
+  `id` INT UNSIGNED AUTO_INCREMENT,
+  `title` VARCHAR(255),
+  `asset_id` INT UNSIGNED COMMENT 'FK to the assets table',
+  `alias` VARCHAR(255) COLLATE 'utf8_bin',
+  `lyrics` MEDIUMTEXT,
+  `state` TINYINT(3) DEFAULT 0,
+  `catid` TINYINT(3) UNSIGNED DEFAULT 0,
+  `created` DATETIME DEFAULT '0000-00-00 00:00:00',
+  `created_by` INT UNSIGNED DEFAULT 0,
+  `publish_up` DATETIME DEFAULT '0000-00-00 00:00:00',
+  `ordering` INT DEFAULT 0,
+  `access` INT UNSIGNED DEFAULT 0,
+  `hits` INT UNSIGNED DEFAULT 0,
+  `downloads` INT UNSIGNED DEFAULT 0,
+  `artist` INT UNSIGNED,
+  `params` MEDIUMTEXT,
+  `modified` DATETIME DEFAULT '0000-00-00 00:00:00',
+  `modified_by` INT UNSIGNED DEFAULT 0,
+  `featured` TINYINT(3) UNSIGNED DEFAULT 0,
+  `source` TEXT COMMENT 'video can even have multible resolution with multiple sourcefile',
+  `language` TINYINT(3),
+  `video` TINYINT(1) DEFAULT false COMMENT 'true mean this is a video',
+  `related` VARCHAR(100),
   PRIMARY KEY (`id`),
-  INDEX `artist_idx` (`artist` ASC),
   CONSTRAINT `artist`
     FOREIGN KEY (`artist`)
-    REFERENCES `com_wsmusic_artist` (`id`)
-    ON DELETE SET NULL
-    ON UPDATE SET NULL
-)DEFAULT CHARACTER SET = utf8;
-
+    REFERENCES `#__wsmusic_artist` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
 
 -- -----------------------------------------------------
--- Table `playlist`
+-- Table `#__wsmusic_playlist`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `playlist` ;
+DROP TABLE IF EXISTS `#__wsmusic_playlist` ;
 
-CREATE TABLE IF NOT EXISTS `playlist` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `tracks` MEDIUMTEXT NULL COMMENT 'json array contain track id',
-  `hits` INT NULL,
-  `downloads` MEDIUMINT NULL,
-  `created` DATETIME NULL,
-  `created_by` INT NULL,
-  `state` TINYINT NULL COMMENT 'options:trash,private,publish,archive,invite',
-  `catid` INT NULL,
-  `type` TINYINT COMMENT 'option:playlist,favorites,album..'
-  'created_by' INT 
-  `desciption` MEDIUMTEXT NULL
-)
-DEFAULT CHARACTER SET = utf8;
-
+CREATE TABLE IF NOT EXISTS `#__wsmusic_playlist` (
+  `id` INT UNSIGNED AUTO_INCREMENT,
+  `name` VARCHAR(45),
+  `tracks` MEDIUMTEXT COMMENT 'json array contain track id',
+  `hits` INT UNSIGNED,
+  `downloads` MEDIUMINT UNSIGNED ,
+  `created` DATETIME DEFAULT '0000-00-00 00:00:00',
+  `created_by` INT UNSIGNED,
+  `state` TINYINT COMMENT 'options:trash,private,publish,archive,invite',
+  `catid` INT UNSIGNED,
+  `type` TINYINT COMMENT 'option:playlist,favorites,album..',
+  `desciption` MEDIUMTEXT,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;

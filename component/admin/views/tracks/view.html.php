@@ -1,8 +1,8 @@
 <?php
 /**
- * @package     wsmusic backend
+ * @package     Joomla.Administrator
  * @subpackage  com_wsmusic
- * @version 	0.0.1
+ *
  * @copyright   Copyright (C) 2005 - 2014 WebSoc company
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -12,14 +12,16 @@ defined('_JEXEC') or die;
 /**
  * View class for a list of tracks.
  *
- * @package     wsmusic backend
+ * @package     Wsmusic.Administrator
  * @subpackage  com_wsmusic
  * @since       0.0.1
  */
 class WsmusicViewTracks extends JViewLegacy
 {
 	protected $state;
+
 	protected $items;
+
 	protected $pagination;
 
 	/**
@@ -31,13 +33,15 @@ class WsmusicViewTracks extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		ContentHelper::addSubmenu('Tracks');
+		WsmusicHelper::addSubmenu('Tracks');
 
 		$this->items         = $this->get('Items');
 		$this->pagination    = $this->get('Pagination');
+		$this->state    	 = $this->get('State');
 		$this->authors       = $this->get('Authors');
 		$this->filterForm    = $this->get('FilterForm');
 		$this->activeFilters = $this->get('ActiveFilters');
+
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
@@ -47,16 +51,17 @@ class WsmusicViewTracks extends JViewLegacy
 		}
 
 		// Levels filter.
-		$options	= array();
-		$options_list=4;
-		for($i=1;$i<=$options_list;$i++)
+		$options		= array();
+		$options_list	= 4;
+
+		for ( $i = 1; $i <= $options_list; $i++ )
 		{
-			$options[]	= JHtml::_('select.option', $i, JText::_('J'.$i));
+			$options[] = JHtml::_('select.option', $i, JText::_('J' . $i));
 		}
-		
+
 		$this->f_levels = $options;
-		
-		//add toolbar and sidebar
+
+		// Add toolbar and sidebar
 		$this->addToolbar();
 		$this->sidebar = JHtmlSidebar::render();
 
@@ -72,7 +77,7 @@ class WsmusicViewTracks extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		$canDo = JHelperContent::getActions($this->state->get('filter.category_id'), 0, 'com_wsmusic');
+		$canDo = JHelperContent::getActions('com_wsmusic', 'component', 0);
 		$user  = JFactory::getUser();
 
 		// Get the toolbar object instance
@@ -83,11 +88,6 @@ class WsmusicViewTracks extends JViewLegacy
 		if ($canDo->get('core.create') || (count($user->getAuthorisedCategories('com_wsmusic', 'core.create'))) > 0 )
 		{
 			JToolbarHelper::addNew('track.add');
-		}
-
-		if (($canDo->get('core.edit')) || ($canDo->get('core.edit.own')))
-		{
-			JToolbarHelper::editList('track.edit');
 		}
 
 		if ($canDo->get('core.edit.state'))
@@ -124,15 +124,14 @@ class WsmusicViewTracks extends JViewLegacy
 	protected function getSortFields()
 	{
 		return array(
-			't.ordering'     => JText::_('JGRID_HEADING_ORDERING'),
-			't.state'        => JText::_('JSTATUS'),
-			't.title'        => JText::_('JGLOBAL_TITLE'),
-			'category_title' => JText::_('JCATEGORY'),
-			'access_level'   => JText::_('JGRID_HEADING_ACCESS'),
-			't.created_by'   => JText::_('JAUTHOR'),
-			't.created'      => JText::_('JDATE'),
-			't.id'           => JText::_('JGRID_HEADING_ID'),
-			
+				't.ordering'     => JText::_('JGRID_HEADING_ORDERING'),
+				't.state'        => JText::_('JSTATUS'),
+				't.title'        => JText::_('JGLOBAL_TITLE'),
+				'category_title' => JText::_('JCATEGORY'),
+				'access_level'   => JText::_('JGRID_HEADING_ACCESS'),
+				't.created_by'   => JText::_('JAUTHOR'),
+				't.created'      => JText::_('JDATE'),
+				't.id'           => JText::_('JGRID_HEADING_ID'),
 		);
 	}
 }

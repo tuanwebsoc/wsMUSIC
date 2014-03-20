@@ -2,6 +2,7 @@
 .settings
 .buildpath
 .project
+.externalToolBuilders
 
 # Window
 Thumbs.db

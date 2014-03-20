@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wsMusic" basedir="." default="copy">
+ 
+    <property name="testdir" value="C:\Users\user\Documents\GitHub\"  />
+    <property name="srcdir"   value="C:\Users\user\Documents\GitHub\wsMUSIC\" />
+ 
+    <!-- Fileset for all files -->
+    <fileset dir="." id="allfiles">
+        <include name="authorunpublish.*" />
+    </fileset>
+ 
+    <!-- Copy Target -->
+    <target name="copy" description="copy target">
+        <echo>Running phing_test.xml. Copying files from dev to test...</echo>
+        <copy todir="${testdir}">
+            <fileset refid="allfiles" />
+        </copy>
+        <echo message="Creating archive..." />
+		<zip destfile="${testdir}/com_wsmusic.zip"  
+		     basedir="${srcdir}"  
+		     includes="**/*.*"/>
+         <echo message="Files copied and archive file created OK!" />
+        </target>
+</project>
